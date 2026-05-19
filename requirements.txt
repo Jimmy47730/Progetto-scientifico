@@ -1,0 +1,9 @@
+numpy
+scipy
+sounddevice
+PyQt6
+pyqtgraph
+fastapi
+fastapi[standard]
+uvicorn
+loguru

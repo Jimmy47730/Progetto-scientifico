@@ -2,23 +2,23 @@
 <html lang="it">
 
 <head>
-	<title>ZeroMirror | Home</title>
+	<title>ZeroMirror | {{ title }}</title>
 	<link rel="stylesheet" href="/static/css/homepage.css">
-	<source src="/static/javascript/homepage.js">
+	<script src="/static/javascript/homepage.js" defer></script>
 </head>
 
 <body>
 	<div class="parent">
-		<div class="logo"> 
+		<div class="logo" id="logo"> 
+			<img src="/static/images/logo.png" alt="Logo - ZeroMirror - Home" class="logo-img">
 			<!-- inserire logo -->
-			{{ logo }}
 		</div>
 		<div class="options">
-			<button class="option-button">Strumenti</button>
-			<button class="option-button">Il nostro progetto</button>
-			<button class="option-button">Risultati</button>
-			<button class="option-button">Il team</button>
-			<button class="option-button">Download</button>
+			<button class="option-button" id="strumenti">Strumenti</button>
+			<button class="option-button" id="progetto">Il nostro progetto</button>
+			<button class="option-button" id="risultati">Risultati</button>
+			<button class="option-button" id="team">Il team</button>
+			<button class="option-button" id="download">Download</button>
 		</div>
 		<div class="upper-right"> 
 			<!-- lasciare vuoto? -->

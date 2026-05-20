@@ -8,6 +8,13 @@
 
 .logo {
 	grid-area: 1 / 1 / 2 / 2;
+	cursor: pointer;
+	text-align: center;
+}
+
+.logo-img {
+	aspect-ratio: 1;
+	height: 100%;
 }
 
 .options {

@@ -7,6 +7,13 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from loguru import logger
 
+# Import dei router
+from routes.main import router as main_router
+
+
+
+
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -20,7 +27,7 @@ async def health_check():
 	return {"status": "ok"}
 
 # Router
-
+app.include_router(main_router)
 
 
 # Gestione globale degli errori 

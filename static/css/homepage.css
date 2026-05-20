@@ -1,19 +1,44 @@
 .parent {
-display: grid;
-grid-template-columns: 80px repeat(3, 1fr) 80px;
-grid-template-rows: 50px repeat(4, 1fr);
-grid-column-gap: 5px;
-grid-row-gap: 20px;
+	display: grid;
+	grid-template-columns: 80px repeat(3, 1fr) 80px;
+	grid-template-rows: 50px repeat(4, 1fr);
+	grid-column-gap: 5px;
+	grid-row-gap: 20px;
 }
 
-.logo { grid-area: 1 / 1 / 2 / 2; }
-.options { grid-area: 1 / 2 / 2 / 5; }
-.upper-right { grid-area: 1 / 5 / 2 / 6; }
-.left { grid-area: 2 / 1 / 6 / 2; }
-.right { grid-area: 2 / 5 / 6 / 6; }
-.title { grid-area: 2 / 2 / 3 / 5; }
-.description { grid-area: 3 / 2 / 6 / 5; }
+.logo {
+	grid-area: 1 / 1 / 2 / 2;
+}
 
-.option button {
+.options {
+	grid-area: 1 / 2 / 2 / 5;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.upper-right {
+	grid-area: 1 / 5 / 2 / 6;
+}
+
+.left {
+	grid-area: 2 / 1 / 6 / 2;
+}
+
+.right {
+	grid-area: 2 / 5 / 6 / 6;
+}
+
+.title {
+	grid-area: 2 / 2 / 3 / 5;
+}
+
+.description {
+	grid-area: 3 / 2 / 6 / 5;
+}
+
+.option-button {
 	cursor: pointer;
+	border-width: 5px 20px;
+	border-color: transparent;
+	background-color: white;
 }

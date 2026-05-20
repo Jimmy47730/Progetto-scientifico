@@ -27,7 +27,7 @@ async def homepage(request: Request):
 async def strumenti(request: Request):
 	return templates.TemplateResponse(
 		request=request,
-		name="homepage.html",
+		name="strumenti.html",
 		context= {
 			"title": "Strumenti"
 		}
@@ -37,7 +37,7 @@ async def strumenti(request: Request):
 async def progetto(request: Request):
 	return templates.TemplateResponse(
 		request=request,
-		name="homepage.html",
+		name="progetto.html",
 		context= {
 			"title": "Il progetto"
 		}
@@ -47,7 +47,7 @@ async def progetto(request: Request):
 async def risultati(request: Request):
 	return templates.TemplateResponse(
 		request=request,
-		name="homepage.html",
+		name="risultati.html",
 		context= {
 			"title": "Risultati"
 		}
@@ -57,7 +57,7 @@ async def risultati(request: Request):
 async def team(request: Request):
 	return templates.TemplateResponse(
 		request=request,
-		name="homepage.html",
+		name="team.html",
 		context= {
 			"title": "Il team"
 		}
@@ -67,7 +67,7 @@ async def team(request: Request):
 async def download(request: Request):
 	return templates.TemplateResponse(
 		request=request,
-		name="homepage.html",
+		name="download.html",
 		context= {
 			"title": "Download"
 		}

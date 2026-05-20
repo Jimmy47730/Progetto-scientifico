@@ -11,7 +11,6 @@
 	cursor: pointer;
 	text-align: center;
 }
-
 .logo-img {
 	aspect-ratio: 1;
 	height: 100%;
@@ -21,6 +20,12 @@
 	grid-area: 1 / 2 / 2 / 5;
 	text-align: center;
 	vertical-align: bottom;
+}
+.option-button {
+	cursor: pointer;
+	border-width: 5px 20px;
+	border-color: transparent;
+	background-color: white;
 }
 
 .upper-right {
@@ -41,11 +46,4 @@
 
 .description {
 	grid-area: 3 / 2 / 6 / 5;
-}
-
-.option-button {
-	cursor: pointer;
-	border-width: 5px 20px;
-	border-color: transparent;
-	background-color: white;
 }

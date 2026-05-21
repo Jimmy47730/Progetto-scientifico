@@ -1,0 +1,57 @@
+.parent {
+	display: grid;
+	grid-template-columns: 80px repeat(6, 1fr) 80px;
+	grid-template-rows: 50px repeat(3, 1fr);
+	grid-column-gap: 5px;
+	grid-row-gap: 20px;
+}
+
+.logo {
+	grid-area: 1 / 1 / 2 / 2;
+	cursor: pointer;
+	text-align: center;
+}
+
+.options {
+	grid-area: 1 / 2 / 2 / 8;
+	text-align: center;
+	vertical-align: bottom;
+}
+.option-button {
+	cursor: pointer;
+	border-width: 5px 20px;
+	border-color: transparent;
+	background-color: white;
+}
+
+.upper-right {
+	grid-area: 1 / 8 / 2 / 9;
+}
+
+.left {
+	grid-area: 2 / 1 / 5 / 2;
+}
+
+.right {
+	grid-area: 2 / 8 / 5 / 9;
+}
+
+.title-container {
+	grid-area: 2 / 2 / 3 / 8;
+	background-color: green;
+}
+.subtitle-container-left {
+	grid-area: 3 / 2 / 4 / 5;
+	text-align: center;
+	background-color: blue;
+}
+.subtitle-container-right {
+	grid-area: 3 / 5 / 4 / 8;
+	text-align: center;
+	background-color: red;
+}
+
+.description-container {
+	grid-area: 4 / 2 / 5 / 8;
+	background-color: aqua;
+}

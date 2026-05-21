@@ -1,0 +1,24 @@
+
+.logo-img {
+	aspect-ratio: 1;
+	height: 100%;
+}
+
+.main-title {
+	text-align: center;
+	font-size: 80px;
+}
+
+.title1 {
+	text-align: center;
+	font-size: xx-large;
+}
+
+.subtitle1 {
+	text-align: center;
+	font-size: larger;
+}
+
+.di-piu-btn {
+	margin-top: 30px;
+}

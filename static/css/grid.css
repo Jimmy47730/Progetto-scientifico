@@ -76,3 +76,20 @@
 	grid-area: 3 / 5 / 5 / 8;
 	background-color: red;
 }
+
+.membro1 {
+	grid-area: 3 / 3 / 4 / 4;
+	background-color: green;
+}
+.membro2 {
+	grid-area: 3 / 4 / 4 / 5;
+	background-color: yellowgreen;
+}
+.membro3 {
+	grid-area: 3 / 5 / 4 / 6;
+	background-color: greenyellow;
+}
+.membro4 {
+	grid-area: 3 / 6 / 4 / 7;
+	background-color: yellow;
+}

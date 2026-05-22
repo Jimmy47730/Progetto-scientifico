@@ -1,7 +1,7 @@
 .parent {
 	display: grid;
-	grid-template-columns: 80px repeat(6, 1fr) 80px;
-	grid-template-rows: 50px repeat(3, 1fr);
+	grid-template-columns: 80px repeat(6, auto) 80px;
+	grid-template-rows: 50px repeat(3, auto);
 	grid-column-gap: 5px;
 	grid-row-gap: 20px;
 }

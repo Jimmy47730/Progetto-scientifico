@@ -55,3 +55,11 @@
 	grid-area: 4 / 2 / 5 / 8;
 	background-color: aqua;
 }
+.all-desc-container-left {
+	grid-area: 3 / 2 / 5 / 5;
+	background-color: blue;
+}
+.all-desc-container-right {
+	grid-area: 3 / 5 / 5 / 8;
+	background-color: red;
+}

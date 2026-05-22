@@ -27,8 +27,20 @@
 	</div>
 	<button class="di-piu-btn" id="di-piu-btn2">Scopri di più</button>
 </div>
-<div class="description-container"> 
-	This is our beautiful project
+<div class="description-container">
+	<div class="subtitle2"> 
+		Fase 1 - Creazione di un fascio di onde sonore parallele
+	</div>
+	<div class="text1">
+		Per poter studiare il comportamento delle onde sonore attraverso diversi metamateriali, è necessario minimizzare il rischio di incorrere in possibili interferenze e misurazioni inconsistenti. Abbiamo quindi scelto di utilizzare un fascio di onde parallelo.
+		La prima parte del nostro progetto consiste quindi nell`ottenere questo fascio di onde sonore parallele a partire da uno speaker comune, che emette onde in formato radiale. 
+		<br><br>
+		Si può trovare un effetto inverso a quello desiderato nelle antenne paraboliche della televisione: esse sfruttano un profilo parabolico per convergere onde parallele in un unico punto di fuoco. Questa è infatti una delle varie proprietà delle parabole. Invertendo fonte e destinazione delle onde sonore, è possibile rendere parallelo un fascio di onde radiali.
+		<br><br>
+		Tuttavia, non eravamo ancora soddisfatti. Uno specchio parabolico è troppo profondo in relazione al suo raggio, almeno per le dimensioni ridotte del nostro progetto. Ispirandoci alla lente di Fresnel, dove il volume della lente viene drasticamente ridotto lasciandone intatta la superficie - e quindi mantenendone la funzionalità - abbiamo deciso di dividere la sezione del nostro specchio in varie frazioni e traslarle indietro per ridurrre lo spessore totale. Così facendo si va però a modificare il fuoco della sezione traslata; per risolvere ciò è necessario modificarne il profilo per mantenere costante il fuoco.
+		<br><br>
+		Abbiamo quindi trovato la funzione matematica che definisce una parabola con fuoco in (0, 0) in base alla distanza del vertice. Da qui è poi stato possibile definire tramite un sistema di funzioni l`intero profilo dello specchio. Più dettagli sullo sviluppo del modello matematico si può trovare sulla pagina dedicata.
+	</div>
 </div>
 
 {% endblock %}

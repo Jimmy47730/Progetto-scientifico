@@ -12,14 +12,24 @@
 .title1 {
 	text-align: center;
 	font-size: xx-large;
+	margin-bottom: 20px;
 }
 
 .subtitle1 {
 	text-align: center;
 	font-size: larger;
 }
+.subtitle2 {
+	text-align: center;
+	font-size: larger;
+	margin: 20px;
+}
 
 .di-piu-btn {
 	margin: 40px;
 	cursor: pointer;
+}
+
+.text1 {
+	margin: 20px;
 }

@@ -19,15 +19,37 @@
 	<div class="title1">
 		Sviluppo dell`idea
 	</div>
-	This is our beautiful idea
+	<div class="text1">
+		L'idea parte dall'osservazione che una parabola riflette onde parallele su un punto focale e, invertendo il processo, è possibile trasformare le onde emesse da una sorgente puntiforme in un fascio allineato. L'utilizzo di un profilo a zone di Fresnel consente di mantenere questa proprietà riducendo drasticamente lo spessore della struttura.
+		<br><br>
+		Questa scelta nasce dalla necessità di realizzare un dispositivo compatto e facilmente stampabile in 3D, capace di generare un fascio sonoro affine a quello impiegato negli esperimenti con metamateriali.
+	</div>
 	<div class="title1">
 		La soluzione
 	</div>
-	This is our beautiful solution
+	<div class="text1">
+		La soluzione progettuale è stata costruita attorno a un modello matematico che descrive la sezione dello specchio come una parabola di Fresnel. Il profilo è stato suddiviso in segmenti, ognuno dei quali è stato traslato mantenendo la condizione di fuoco costante. In questo modo si ottiene un elemento riflettente meno profondo, ma con le stesse proprietà direzionali di un paraboloide classico.
+		<br><br>
+		Il modello è stato sviluppato con strumenti di calcolo simbolico e numerico, partendo da una funzione parametrica per la distanza del vertice e arrivando a una generazione automatica del profilo completo. Questo approccio garantisce una soluzione riproducibile e modulare, adatta a diverse frequenze e dimensioni del fascio.
+	</div>
 	<div class="title1">
 		Creazione del prototipo
 	</div>
-	This is our beautiful prototype
+	<div class="text1">
+		Il prototipo è stato realizzato tramite stampa 3D utilizzando materiali plastici rigidi e un design a sezioni concentriche. La struttura è stata testata con un sistema sperimentale a doppio microfono per verificare la qualità del fascio parallelo e la corrispondenza con le previsioni del modello.
+		<br><br>
+		Le prove sperimentali hanno confermato la validità dell'approccio: il fascio generato mostra un'ottima uniformità e una direzionalità compatibile con le specifiche previste. I risultati sono stati quindi confrontati con l'analisi numerica e con il documento tecnico allegato.
+	</div>
+	<div class="title1">
+		Analisi dei metamateriali
+	</div>
+	<div class="text1">
+		L'analisi dei metamateriali ha approfondito la risposta del fascio parallelo a superfici strutturate con passo e forme diverse. Sono stati esaminati elementi periodici con motivi a reticolo e a nido d'ape, confrontando la trasmissione acustica e gli effetti di diffrazione in relazione alle dimensioni delle celle.
+		<br><br>
+		Il confronto tra i segnali acquisiti con il pacchetto `audio_comparator` e i risultati attesi dal modello ha permesso di valutare come la geometria dei metamateriali influisca sull'attenuazione, sulla dispersione spettrale e sulla conservazione della planarità del fascio.
+		<br><br>
+		Questa parte di analisi è fondamentale per comprendere l'efficacia dei metamateriali nel controllare il suono e per definire strategie di progettazione che possano essere applicate ad altri dispositivi acustici.
+	</div>
 </div>
 
 {% endblock %}

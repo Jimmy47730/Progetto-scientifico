@@ -38,58 +38,58 @@
 
 .title-container {
 	grid-area: 2 / 2 / 3 / 8;
-	background-color: green;
+	background-color: transparent;
 }
 
 .subtitle-container-left {
 	grid-area: 3 / 2 / 4 / 5;
 	text-align: center;
-	background-color: blue;
+	background-color: transparent;
 }
 .subtitle-container-right {
 	grid-area: 3 / 5 / 4 / 8;
 	text-align: center;
-	background-color: red;
+	background-color: transparent;
 }
 .subtitle-container-all-left {
 	grid-area: 3 / 2 / 4 / 4;
-	background-color: blue;
+	background-color: transparent;
 }
 .subtitle-container-middle {
 	grid-area: 3 / 4 / 4 / 6;
-	background-color: violet;
+	background-color: transparent;
 }
 .subtitle-container-all-right {
 	grid-area: 3 / 6 / 4 / 8;
-	background-color: red;
+	background-color: transparent;
 }
 
 .description-container {
 	grid-area: 4 / 2 / 5 / 8;
-	background-color: aqua;
+	background-color: transparent;
 }
 .all-desc-container-left {
 	grid-area: 3 / 2 / 5 / 5;
-	background-color: blue;
+	background-color: transparent;
 }
 .all-desc-container-right {
 	grid-area: 3 / 5 / 5 / 8;
-	background-color: red;
+	background-color: transparent;
 }
 
 .membro1 {
 	grid-area: 3 / 3 / 4 / 4;
-	background-color: green;
+	background-color: transparent;
 }
 .membro2 {
 	grid-area: 3 / 4 / 4 / 5;
-	background-color: yellowgreen;
+	background-color: transparent;
 }
 .membro3 {
 	grid-area: 3 / 5 / 4 / 6;
-	background-color: greenyellow;
+	background-color: transparent;
 }
 .membro4 {
 	grid-area: 3 / 6 / 4 / 7;
-	background-color: yellow;
+	background-color: transparent;
 }

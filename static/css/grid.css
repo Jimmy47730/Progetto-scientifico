@@ -1,7 +1,8 @@
 .parent {
+	margin: 20px;
 	display: grid;
 	grid-template-columns: 80px repeat(6, auto) 80px;
-	grid-template-rows: 50px repeat(3, auto);
+	grid-template-rows: 80px repeat(3, auto);
 	grid-column-gap: 5px;
 	grid-row-gap: 20px;
 }
@@ -22,6 +23,7 @@
 	border-width: 5px 20px;
 	border-color: transparent;
 	background-color: white;
+	vertical-align: center;
 }
 
 .upper-right {

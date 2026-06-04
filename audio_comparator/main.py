@@ -19,10 +19,9 @@ class ApplicationController:
     """
     Main controller linking Audio Manager, Analyzer, and UI.
     """
-    def __init__(self, simulate: bool = False):
+    def __init__(self):
         # Initialize sub-systems
-        self.simulate = simulate
-        self.audio_manager = AudioManager(sample_rate=SAMPLE_RATE, block_size=BLOCK_SIZE, simulate=self.simulate)
+        self.audio_manager = AudioManager(sample_rate=SAMPLE_RATE, block_size=BLOCK_SIZE)
         self.analyzer = AudioAnalyzer(sample_rate=SAMPLE_RATE)
         self.ui = TerminalDashboard(block_size=BLOCK_SIZE, audio_manager=self.audio_manager)
         
@@ -123,12 +122,18 @@ class ApplicationController:
         """
         Starts the application flow.
         """
+        # Populate device list in UI
+        try:
+            devices = self.audio_manager.get_input_devices()
+            self.ui.populate_device_list(devices)
+        except Exception:
+            pass
+        
         self.audio_manager.start_listening()
         # Update source status on startup
         try:
-            sim = self.audio_manager.is_simulated()
             conn = self.audio_manager.is_connected()
-            self.ui.update_source_status(simulated=sim, connected=conn)
+            self.ui.update_source_status(connected=conn)
         except Exception:
             pass
         self.ui.show()
@@ -147,14 +152,11 @@ class ApplicationController:
 
             # Update UI source status and no-data indicator
             try:
-                sim = self.audio_manager.is_simulated()
                 conn = self.audio_manager.is_connected()
-                # if real but no data, mark no-data
-                if not sim and no_data:
-                    self.ui.update_source_status(simulated=False, connected=False)
+                self.ui.update_source_status(connected=conn)
+                if no_data:
                     self.ui.set_no_data(True)
                 else:
-                    self.ui.update_source_status(simulated=sim, connected=conn)
                     self.ui.set_no_data(False)
             except Exception:
                 pass
@@ -171,14 +173,13 @@ class ApplicationController:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Audio Comparator")
-    parser.add_argument('--simulate', action='store_true', help='Run without audio hardware and use simulated microphone signals')
     args, remaining = parser.parse_known_args()
 
     # Initialize the Qt Application
     app = QApplication(remaining)
     
-    # Initialize our Controller (pass simulate flag)
-    controller = ApplicationController(simulate=args.simulate)
+    # Initialize our Controller
+    controller = ApplicationController()
 
     controller.run()
 

@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (
     QMainWindow, QVBoxLayout, QWidget, QLabel, QHBoxLayout,
-    QGroupBox, QFormLayout, QDoubleSpinBox, QPushButton, QComboBox
+    QGroupBox, QFormLayout, QPushButton, QComboBox
 )
 from PyQt6.QtCore import QTimer
 import pyqtgraph as pg
@@ -33,16 +33,14 @@ class TerminalDashboard(QMainWindow):
         self.info_label.setStyleSheet("font-size: 14px; font-weight: bold;")
         layout.addWidget(self.info_label)
 
-        # Source status and retry
+        # Source status and device selection
         status_layout = QHBoxLayout()
         self.status_label = QLabel("Source: UNKNOWN")
         self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #FFFF00;")
         status_layout.addWidget(self.status_label)
 
-        self.retry_btn = QPushButton("Retry Connection")
+        self.retry_btn = QPushButton("Reconnect")
         status_layout.addWidget(self.retry_btn)
-        self.switch_sim_btn = QPushButton("Switch to Simulated")
-        status_layout.addWidget(self.switch_sim_btn)
         layout.addLayout(status_layout)
 
         # No-data indicator
@@ -114,57 +112,23 @@ class TerminalDashboard(QMainWindow):
         self._m2_freq = deque([0.0]*self.history_len, maxlen=self.history_len)
         self._disc = deque([0.0]*self.history_len, maxlen=self.history_len)
 
-        # Controls for simulation parameters
-        ctrl_box = QGroupBox("Simulation Controls")
-        ctrl_layout = QFormLayout(ctrl_box)
+        # Device selection controls
+        dev_box = QGroupBox("Input Devices")
+        dev_layout = QFormLayout(dev_box)
 
-        self.freq1_spin = QDoubleSpinBox()
-        self.freq1_spin.setRange(20.0, 5000.0)
-        self.freq1_spin.setValue(440.0)
-        self.freq1_spin.setSingleStep(1.0)
-        ctrl_layout.addRow("Mic1 Frequency (Hz)", self.freq1_spin)
+        self.dev1_combo = QComboBox()
+        self.dev2_combo = QComboBox()
+        dev_layout.addRow("Mic 1 Device", self.dev1_combo)
+        dev_layout.addRow("Mic 2 Device", self.dev2_combo)
 
-        self.freq2_spin = QDoubleSpinBox()
-        self.freq2_spin.setRange(20.0, 5000.0)
-        self.freq2_spin.setValue(442.0)
-        self.freq2_spin.setSingleStep(1.0)
-        ctrl_layout.addRow("Mic2 Frequency (Hz)", self.freq2_spin)
+        self.apply_dev_btn = QPushButton("Apply Devices")
+        dev_layout.addRow(self.apply_dev_btn)
 
-        self.amp1_spin = QDoubleSpinBox()
-        self.amp1_spin.setRange(0.0, 1.0)
-        self.amp1_spin.setValue(0.3)
-        self.amp1_spin.setSingleStep(0.01)
-        ctrl_layout.addRow("Mic1 Amplitude", self.amp1_spin)
-
-        self.amp2_spin = QDoubleSpinBox()
-        self.amp2_spin.setRange(0.0, 1.0)
-        self.amp2_spin.setValue(0.25)
-        self.amp2_spin.setSingleStep(0.01)
-        ctrl_layout.addRow("Mic2 Amplitude", self.amp2_spin)
-
-        self.noise_spin = QDoubleSpinBox()
-        self.noise_spin.setRange(0.0, 0.5)
-        self.noise_spin.setValue(0.005)
-        self.noise_spin.setSingleStep(0.001)
-        ctrl_layout.addRow("Noise Level", self.noise_spin)
-
-        self.apply_btn = QPushButton("Apply Simulation Settings")
-        ctrl_layout.addRow(self.apply_btn)
-
-        # Preset selector
-        self.preset_combo = QComboBox()
-        self.preset_combo.addItems(["sine", "impulse", "noise", "chirp", "speech"]) 
-        self.preset_btn = QPushButton("Apply Preset")
-        ctrl_layout.addRow("Preset", self.preset_combo)
-        ctrl_layout.addRow(self.preset_btn)
-
-        layout.addWidget(ctrl_box)
+        layout.addWidget(dev_box)
 
         # Connect control signals
-        self.apply_btn.clicked.connect(self._apply_sim_settings)
-        self.preset_btn.clicked.connect(self._apply_preset)
+        self.apply_dev_btn.clicked.connect(self._apply_devices)
         self.retry_btn.clicked.connect(self._on_retry)
-        self.switch_sim_btn.clicked.connect(self._on_switch_sim)
 
         # X-axis data (Sample indices)
         self.x_data = np.arange(self.block_size)
@@ -199,25 +163,16 @@ class TerminalDashboard(QMainWindow):
         self._m2_freq.append(freq2)
         self._disc.append(rms1 - rms2)
 
-    def update_source_status(self, simulated: bool, connected: bool = True):
+    def update_source_status(self, connected: bool = True):
         """Update the source status indicator."""
-        # Always enable the switch button so user can toggle modes
-        self.switch_sim_btn.setEnabled(True)
-        if simulated:
-            self.status_label.setText("Source: SIMULATED")
-            self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #ffff00;")
-            self.retry_btn.setEnabled(True)
-            self.switch_sim_btn.setText("Switch to Real")
+        # Always enable the retry button
+        self.retry_btn.setEnabled(True)
+        if connected:
+            self.status_label.setText("Source: CONNECTED")
+            self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #00FF00;")
         else:
-            if connected:
-                self.status_label.setText("Source: REAL (connected)")
-                self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #00FF00;")
-                self.retry_btn.setEnabled(False)
-            else:
-                self.status_label.setText("Source: REAL (no data)")
-                self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #FF0000;")
-                self.retry_btn.setEnabled(True)
-            self.switch_sim_btn.setText("Switch to Simulated")
+            self.status_label.setText("Source: DISCONNECTED")
+            self.status_label.setStyleSheet("font-size: 12px; font-weight: bold; color: #FF0000;")
 
     def set_no_data(self, no_data: bool):
         if no_data:
@@ -234,28 +189,6 @@ class TerminalDashboard(QMainWindow):
         self.m2_freq_curve.setData(x, np.array(self._m2_freq))
         self.disc_curve.setData(x, np.array(self._disc))
 
-    def _apply_sim_settings(self):
-        if not self.audio_manager:
-            return
-        f1 = float(self.freq1_spin.value())
-        f2 = float(self.freq2_spin.value())
-        a1 = float(self.amp1_spin.value())
-        a2 = float(self.amp2_spin.value())
-        n = float(self.noise_spin.value())
-        try:
-            self.audio_manager.set_sim_params(freq1=f1, freq2=f2, amp1=a1, amp2=a2, noise=n)
-        except Exception:
-            pass
-
-    def _apply_preset(self):
-        if not self.audio_manager:
-            return
-        preset = str(self.preset_combo.currentText())
-        try:
-            self.audio_manager.set_sim_preset(preset)
-        except Exception:
-            pass
-
     def _on_retry(self):
         if not self.audio_manager:
             return
@@ -267,59 +200,40 @@ class TerminalDashboard(QMainWindow):
 
         # Update UI based on result
         try:
-            sim = self.audio_manager.is_simulated()
+            self.update_source_status(connected=ok)
         except Exception:
-            sim = True
-        self.update_source_status(simulated=sim, connected=ok)
+            pass
         if ok:
-            self.info_label.setText("Reconnected to real device.")
+            self.info_label.setText("Reconnected to device.")
+            self.set_no_data(False)
         else:
-            self.info_label.setText("Retry failed — still simulated or no device.")
-
-    def _on_switch_sim(self):
-        if not self.audio_manager:
-            return
-        # Toggle: if currently simulated, try to switch back to real; otherwise switch to simulated
-        try:
-            is_sim = self.audio_manager.is_simulated()
-        except Exception:
-            is_sim = False
-
-        if is_sim:
-            # show intermediate no-data state immediately while attempting reconnect
-            self.update_source_status(simulated=False, connected=False)
+            self.info_label.setText("Retry failed — no device or permission error.")
             self.set_no_data(True)
 
-            # attempt to reconnect to real device
-            ok = False
-            try:
-                ok = self.audio_manager.retry_connection()
-            except Exception:
-                ok = False
-
-            # update UI after attempt
-            try:
-                sim = self.audio_manager.is_simulated()
-            except Exception:
-                sim = False
-            self.update_source_status(simulated=sim, connected=ok)
+    def _apply_devices(self):
+        """Apply selected devices to the audio manager."""
+        if not self.audio_manager:
+            return
+        try:
+            d1 = self.dev1_combo.currentData()
+            d2 = self.dev2_combo.currentData()
+            # set devices on manager
+            self.audio_manager.set_devices(d1, d2)
+            ok = self.audio_manager.retry_connection()
+            self.update_source_status(connected=ok)
             if ok:
-                self.info_label.setText("Switched to real device.")
+                self.info_label.setText("Devices applied and connected.")
                 self.set_no_data(False)
             else:
-                self.info_label.setText("Failed to switch to real device.")
-        else:
-            ok = False
-            try:
-                ok = self.audio_manager.switch_to_simulation()
-            except Exception:
-                ok = False
-            try:
-                sim = self.audio_manager.is_simulated()
-            except Exception:
-                sim = True
-            self.update_source_status(simulated=sim, connected=ok)
-            if ok:
-                self.info_label.setText("Switched to simulated source.")
-            else:
-                self.info_label.setText("Failed to switch to simulated source.")
+                self.info_label.setText("Devices applied but not connected.")
+                self.set_no_data(True)
+        except Exception:
+            pass
+
+    def populate_device_list(self, devices: list):
+        """Populate the device comboboxes with available input devices."""
+        self.dev1_combo.clear()
+        self.dev2_combo.clear()
+        for idx, name in devices:
+            self.dev1_combo.addItem(name, idx)
+            self.dev2_combo.addItem(name, idx)

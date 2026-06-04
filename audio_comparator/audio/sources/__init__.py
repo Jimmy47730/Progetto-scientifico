@@ -1,5 +1,4 @@
 from .base import AudioFrame, DataSource
-from .simulator_source import SimulatorSource
-from .sounddevice_source import SoundDeviceSource
+from .sounddevice_source import SoundDeviceSource, list_input_devices
 
-__all__ = ["AudioFrame", "DataSource", "SimulatorSource", "SoundDeviceSource"]
+__all__ = ["AudioFrame", "DataSource", "SoundDeviceSource", "list_input_devices"]

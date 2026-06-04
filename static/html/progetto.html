@@ -9,14 +9,14 @@
 	</div>
 </div>
 <div class="description-container"> 
-	<div class="title1">
+	<div class="title1" id="abstract">
 		Abstract
 	</div>
 	<div class="text1">
 		In questo lavoro viene presentato un progetto didattico-scientifico finalizzato allo studio del fenomeno di riflessione delle onde sonore per la creazione di un fascio parallelo. L’obiettivo principale è analizzare il comportamento di tali onde al passaggio attraverso metamateriali acustici, valutando come la struttura fisica di un ostacolo influenzi la propagazione del suono. Utilizzando strumenti di calcolo simbolico e numerico è stata individuata una famiglia di equazioni in grado di descrivere uno specchio parabolico di spessore definito, basato sullo stesso principio fisico della lente di Fresnel. Il modello matematico è stato successivamente tradotto in una struttura fisica realizzata tramite stampa 3D.
 
 	</div>
-	<div class="title1">
+	<div class="title1" id="sviluppo-dell-idea">
 		Sviluppo dell`idea
 	</div>
 	<div class="text1">
@@ -24,32 +24,30 @@
 		<br><br>
 		Questa scelta nasce dalla necessità di realizzare un dispositivo compatto e facilmente stampabile in 3D, capace di generare un fascio sonoro affine a quello impiegato negli esperimenti con metamateriali.
 	</div>
-	<div class="title1">
+	<div class="title1" id="la-soluzione">
 		La soluzione
 	</div>
 	<div class="text1">
 		La soluzione progettuale è stata costruita attorno a un modello matematico che descrive la sezione dello specchio come una parabola di Fresnel. Il profilo è stato suddiviso in segmenti, ognuno dei quali è stato traslato mantenendo la condizione di fuoco costante. In questo modo si ottiene un elemento riflettente meno profondo, ma con le stesse proprietà direzionali di un paraboloide classico.
 		<br><br>
-		Il modello è stato sviluppato con strumenti di calcolo simbolico e numerico, partendo da una funzione parametrica per la distanza del vertice e arrivando a una generazione automatica del profilo completo. Questo approccio garantisce una soluzione riproducibile e modulare, adatta a diverse frequenze e dimensioni del fascio.
+		Il modello è stato sviluppato a mano, partendo da una funzione parametrica per la distanza del vertice e arrivando allo sviluppo di un software per la generazione automatica del profilo completo. Questo approccio garantisce una soluzione riproducibile e modulare, adatta a diverse frequenze e dimensioni del fascio.
 	</div>
-	<div class="title1">
+	<div class="title1" id="modellazione-matematica">
+		La modellazione matematica
+	</div>
+	<div class="text1">
+		Le seguenti immagini riportano tutte le funzioni matematiche utilizzate per la modellazione del profilo dello specchio. Sono state derivate a mano in base alla natura del problema, partendo da un profilo sul piano cartesiano e ruotandolo sull'asse centrale per ottenere un solido.
+		<br><br>
+		<!-- Aggiungere le immagini --> 
+		P.S. le immagini sono ancora da mettere lol
+	</div>
+	<div class="title1" id="creazione-del-prototipo">
 		Creazione del prototipo
 	</div>
 	<div class="text1">
 		Il prototipo è stato realizzato tramite stampa 3D utilizzando materiali plastici rigidi e un design a sezioni concentriche. La struttura è stata testata con un sistema sperimentale a doppio microfono per verificare la qualità del fascio parallelo e la corrispondenza con le previsioni del modello.
 		<br><br>
-		Le prove sperimentali hanno confermato la validità dell'approccio: il fascio generato mostra un'ottima uniformità e una direzionalità compatibile con le specifiche previste. I risultati sono stati quindi confrontati con l'analisi numerica e con il documento tecnico allegato.
-	</div>
-	<div class="title1">
-		Analisi dei metamateriali
-	</div>
-	<div class="text1">
-		L'analisi dei metamateriali ha approfondito la risposta del fascio parallelo a superfici strutturate con passo e forme diverse. Sono stati esaminati elementi periodici con motivi a reticolo e a nido d'ape, confrontando la trasmissione acustica e gli effetti di diffrazione in relazione alle dimensioni delle celle.
-		<br><br>
-		Il confronto tra i segnali acquisiti con il pacchetto `audio_comparator` e i risultati attesi dal modello ha permesso di valutare come la geometria dei metamateriali influisca sull'attenuazione, sulla dispersione spettrale e sulla conservazione della planarità del fascio.
-		<br><br>
-		Questa parte di analisi è fondamentale per comprendere l'efficacia dei metamateriali nel controllare il suono e per definire strategie di progettazione che possano essere applicate ad altri dispositivi acustici.
-	</div>
+		Le prove sperimentali hanno confermato la validità dell'approccio: il fascio generato mostra un'ottima uniformità e una direzionalità compatibile con le specifiche previste, se pur con un margine di errore non trascurabile.
 </div>
 
 {% endblock %}

@@ -14,12 +14,12 @@
 	<button class="di-piu-btn" id="di-piu-btn1">Scopri di più</button>
 </div>
 <div class="subtitle-container-middle">
-	Beam Analyzer
+	ZeroMirror Creator
 	<br>
 	<button class="di-piu-btn" id="di-piu-btn2">Scopri di più</button>
 </div>
 <div class="subtitle-container-all-right">
-	Metamaterial Designer
+	Risorse per la prototipazione
 	<br>
 	<button class="di-piu-btn" id="di-piu-btn3">Scopri di più</button>
 </div>
@@ -27,6 +27,44 @@
 	<div class="box-text">Questi strumenti sono stati sviluppati per supportare le fasi sperimentali e l'analisi acustica del progetto. Il primo tool, `audio_comparator`, confronta i segnali acquisiti da due microfoni per mettere in evidenza variazioni di ampiezza e frequenza. Il secondo aiuta a interpretare la distribuzione del fascio parallelo e a valutare l'effetto dei metamateriali. Il terzo consente di progettare e documentare le geometrie dei metamateriali studiati nel progetto.
 	<br><br>
 	Alcuni di questi strumenti saranno resi disponibili come link di download e come repository separate su GitHub, in modo da rendere accessibile il codice e favorire sviluppi successivi.</div>
+	
+	<!-- Sezione descrittiva per Audio Comparator (indirizzata dal pulsante "Scopri di più") -->
+	<div id="audio-comparator-info" style="margin-top: 40px;">
+		<h2>Audio Comparator</h2>
+		<div class="box-text">
+			Il pacchetto <strong>Audio Comparator</strong> è uno strumento Python progettato per acquisire e confrontare due segnali microfonici simultanei. Fornisce metriche quali l'ampiezza (RMS) e la frequenza dominante, e include componenti per l'acquisizione da dispositivi audio e l'analisi tramite FFT. È pensato per supportare esperimenti acustici e l'analisi comparativa tra canali.
+			<br><br>
+			Puoi scaricare il pacchetto dalla pagina dei <a href="/download" target="_blank">download</a>
+		</div>
+
+		<img src="/static/images/audio_comparator.png" alt="Audio Comparator" class="tool-image">
+	</div>
+
+	<!-- Sezione descrittiva per ZeroMirror Creator (indirizzata dal pulsante "Scopri di più") -->
+	<div id="zeromirror-creator-info" style="margin-top: 40px;">
+		<h2>ZeroMirror Creator</h2>
+		<div class="box-text">
+			Il tool <strong>ZeroMirror Creator</strong> è un software sviluppato per facilitare il design di uno specchio parabolico sottile in base ai parametri voluti. Funziona in base alle funzioni matematiche descritte nella sezione <a href="/progetto#modellazione-matematica" target="_self">modellazione matematica</a> e consente di generare file STL pronti per la stampa 3D, semplificando il processo di realizzazione dei prototipi.
+			<br><br>
+			Puoi scaricare il tool dalla pagina dei <a href="/download" target="_blank">download</a>
+			
+			<img src="/static/images/zeromirror_creator.png" alt="ZeroMirror Creator" class="tool-image">
+			
+		</div>
+	</div>
+	
+	<!-- Sezione descrittiva per ZeroMirror Creator (indirizzata dal pulsante "Scopri di più") -->
+	<div id="prototipazione-info" style="margin-top: 40px;">
+		<h2>Risorse per la prototipazione</h2>
+		<div class="box-text">
+			I file e le risorse necessari per la realizzazione dei prototipi.
+			<br><br>
+			Puoi scaricare i file dalla pagina dei <a href="/download" target="_blank">download</a>
+			
+			<img src="/static/images/prototipazione.png" alt="Risorse per la prototipazione" class="tool-image">
+			
+		</div>
+	</div>
 </div>
 
 {% endblock %}

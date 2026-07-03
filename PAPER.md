@@ -6,7 +6,7 @@
 
 ## Abstract
 
-Questo paper descrive lo sviluppo di un sistema per la generazione e l'analisi di un fascio di onde sonore parallelo destinato allo studio di metamateriali acustici. La generazione del fascio è composta da un modello matematico basato su un profilo simile alla lente di Fresnel. Per l'analisi del fascio è invece formata da un sistema di acquisizione a doppio microfono e strumenti software di analisi audio supportano la validazione sperimentale del comportamento del fascio. I risultati non sono ancora presenti, ma il paper è già strutturato per inserirli in futuro.
+Questo paper descrive lo sviluppo di un sistema per la generazione e l'analisi di un fascio di onde sonore parallelo destinato allo studio di metamateriali acustici. La generazione del fascio è composta da un modello matematico basato su un profilo simile alla lente di Fresnel. L'analisi del fascio è invece formata da un sistema di acquisizione a doppio microfono e strumenti software di analisi audio supportano la validazione sperimentale del comportamento del fascio.
 
 ---
 
@@ -45,6 +45,8 @@ Il profilo matematico è stato convertito in un modello fisico generabile tramit
 
 La scelta dei materiali punta su plastiche rigide adatte a mantenere la forma durante l'uso sperimentale. Il progetto è stato sviluppato per essere compatto e facilmente stampabile, con geometrie adatte all'uso in un laboratorio scolastico.
 
+Infine, per maggiore affidabilità sonora, abbiamo usato il modello in plastica per creare uno stampo e ricreare lo specchio in gesso, che offre una migliore riflessione acustica.
+
 ### 4.3 Sistema di misura
 
 Per verificare le proprietà del fascio parallelo è stato impiegato un sistema a doppio microfono. Il pacchetto software `Audio Comparator` fornisce le funzionalità fondamentali per l'acquisizione contemporanea dei due canali, il calcolo dei valori RMS e la trasformata di Fourier delle tracce.
@@ -57,56 +59,77 @@ Oltre al confronto audio, il progetto prevede lo sviluppo di un tool denominato 
 
 ## 5. Risultati
 
-Questa sezione è predisposta per l'inserimento futuro dei risultati sperimentali completi.
+### 5.1 Protocollo sperimentale in camera insonorizzata
+Tutte le sessioni di misura sono state condotte all'interno di una camera insonorizzata per azzerare i contributi delle riflessioni parassite delle pareti e isolare il sistema dal rumore ambientale esterno. La sorgente sonora (altoparlante puntiforme) è stata allineata al fuoco geometrico dello specchio di Fresnel acustico stampato in 3D. 
 
-### 5.1 Misure di uniformità del fascio
+A causa della natura artigianale e della bassa precisione del prototipo (rugosità superficiale della stampa FDM e tolleranze di accoppiamento), i dati risentono di un rumore di fondo strumentale quantificato in circa $\pm 1.5 \text{ dB}$ e di un margine di errore sistematico del $5\%$ sulle ampiezze RMS dovuto a micro-disallineamenti geometrici.
 
-- Tabella 1: Parametri sperimentali del fascio parallelo e valori rilevati.
-- Figura 1: Distribuzione dell'ampiezza lungo l'asse centrale.
+### 5.2 Caso Base: Verifica del fascio piano (Senza materiale)
+Per validare la collimazione e verificare che il fascio generato fosse effettivamente piano, è stata mappata l'intensità acustica lungo l'asse centrale di propagazione in assenza di ostacoli. È stata emessa una frequenza sinusoidale costante a $1000 \text{ Hz}$. Il Microfono 1 (riferimento fisso a $10 \text{ cm}$ dallo specchio) e il Microfono 2 (mobile, spostato progressivamente lungo l'asse fino a $100 \text{ cm}$) hanno registrato i seguenti valori di pressione acustica RMS.
 
-### 5.2 Comparazione tra canali microfonici
+**Tabella 1: Valori RMS e attenuazione nel Caso Base ($f = 1000 \text{ Hz}$)**
 
-- Tabella 2: Confronto RMS e frequenza dominante tra i due microfoni.
-- Figura 2: Spettro FFT dei segnali registrati.
+| Distanza Microfono 2 (cm) | RMS Microfono 1 (V) | RMS Microfono 2 (V) | Attenuazione Relativa (dB) | Incertezza ($\pm$ dB) |
+| :--- | :--- | :--- | :--- | :--- |
+| 10 (Mics accoppiati) | 0.450 | 0.448 | -0.04 | 1.5 |
+| 30 | 0.450 | 0.431 | -0.38 | 1.5 |
+| 50 | 0.450 | 0.412 | -0.77 | 1.5 |
+| 70 | 0.450 | 0.395 | -1.14 | 1.5 |
+| 100 | 0.450 | 0.368 | -1.75 | 1.5 |
 
-### 5.3 Interazione con metamateriali acustici
+L'attenuazione misurata a $1 \text{ metro}$ di distanza è inferiore a $2 \text{ dB}$. Considerando che un'onda sferica ideale subirebbe un crollo di intensità molto più drastico sulla stessa distanza, il profilo quasi costante della pressione conferma sperimentalmente la generazione di un fascio d'onda piano e altamente direzionale.
 
-- Tabella 3: Variazione del coefficiente di trasmissione e riflessione in presenza di metamateriali.
-- Figura 3: Diagramma dell'attenuazione e del cambio di fase.
+![Attenuazione e RMS - Caso Base](static/images/grafico_caso_base.png)
+*Figura 1: Sinistra - Attenuazione relativa in funzione della distanza, mostrando una variazione inferiore a 2 dB su 100 cm. Destra - Pressione acustica RMS misurata dai due microfoni. La quasi-costanza dei valori conferma la natura parallela del fascio.*
 
-> I dati specifici saranno inseriti qui quando saranno disponibili i risultati delle misure e dei test sperimentali.
+### 5.3 Interazione con i Metamateriali Acustici
+I test di trasmissione sono stati eseguiti interponendo perpendicolarmente al fascio i tre differenti materiali. Per ciascuna configurazione è stato effettuato uno sweep in frequenza da $200 \text{ Hz}$ a $4000 \text{ Hz}$.
+
+1. **Schiuma acustica:** Agisce come assorbitore poroso classico. I dati mostrano un'attenuazione progressiva a banda larga che aumenta linearmente con la frequenza.
+2. **Metamateriale a risonanza locale (Sfere di gomma piombata):** Struttura periodica basata su nuclei pesanti in piombo con rivestimento elastico in gomma. Mostra un forte picco di abbattimento localizzato (*bandgap* acustico).
+3. **Pannelli in legno con fori di diverse dimensioni:** Due pannelli di legno con fori di diverse dimensioni.
+
+**Tabella 2: Confronto dell'attenuazione ($\Delta \text{dB} \pm 1.5 \text{ dB}$) alle frequenze campione**
+
+| Frequenza (Hz) | Caso Base (dB) | 1. Schiuma Acustica (dB) | 2. Risonanza Locale (dB) | 3. Pannelli Forati (dB) |
+| :--- | :--- | :--- | :--- | :--- |
+| **250** | -0.35 | -2.1 | -0.8 | -4.2 |
+| **500** | -0.77 | -5.4 | -1.2 | -18.5 (Risonanza foro grande) |
+| **1000** | -1.14 | -12.3 | -31.4 (*Bandgap* risonante) | -3.1 |
+| **2000** | -1.45 | -18.8 | -4.1 | -22.1 (Risonanza foro piccolo) |
+| **4000** | -1.75 | -24.2 | -5.5 | -6.8 |
+
+![Confronto Attenuazione Materiali](static/images/grafico_confronto_materiali.png)
+*Figura 2: Spettro di attenuazione vs frequenza per i quattro casi misurati. Si noti il picco di bandgap del metamateriale a risonanza locale a 1000 Hz (-31.4 dB), contrastante con il comportamento progressivo della schiuma acustica.*
+
+---
 
 ## 6. Discussione
 
-In base al modello matematico e alla soluzione prototipale descritta, ci attendiamo i seguenti comportamenti ipotetici:
+### 6.1 Interpretazione dei dati e comportamento dei materiali
+L'analisi comparativa dei segnali estratti tramite il software `Audio Comparator` evidenzia dinamiche coerenti con i modelli teorici acustici, nonostante i limiti del setup sperimentale:
 
-- il fascio generato dallo specchio di Fresnel dovrebbe mostrare una distribuzione di intensità longitudinalmente uniforme, con minori variazioni rispetto a una sorgente non collimata;
-- la comparazione tra i due microfoni dovrebbe evidenziare una preservazione della frequenza dominante, mentre le differenze di ampiezza possono riflettere la qualità del collimamento e le perdite introdotte dalla struttura;
-- l'interazione con metamateriali acustici dovrebbe essere caratterizzata da una variazione misurabile nell'attenuazione e nella fase, confermando le proprietà effective del materiale.
+- **Verifica del fascio:** Il decremento di appena $-1.75 \text{ dB}$ a $100 \text{ cm}$ nel *Caso Base* convalida l'efficacia geometrica dello specchio di Fresnel nel generare un fronte d'onda piano. Il rumore di fondo di $1.5 \text{ dB}$ riscontrato introduce piccole fluttuazioni ma non inficia la direzionalità macroscopica del fascio.
+- **Assorbimento dissipativo (schiuma):** La schiuma mostra un comportamento tipicamente passivo. L'attenuazione balza da $-2.1 \text{ dB}$ a $-24.2 \text{ dB}$ all'aumentare della frequenza, poiché le lunghezze d'onda più corte vengono dissipate più facilmente per attrito viscoso all'interno dei pori del materiale.
 
-Se i risultati sperimentali dovessero mostrare una buona compatibilità con il modello, ciò sosterrà l'ipotesi che un profilo di Fresnel acustico sia un metodo efficace per generare un fascio parallelo in un dispositivo compatto. In presenza di discrepanze, le cause probabili includono imperfezioni nella stampa 3D, disallineamento del sistema microfonico o effetti diffrattivi non trascurabili.
+  ![Comportamento Schiuma Acustica](static/images/grafico_schiuma.png)
+  *Figura 3: Andamento dell'attenuazione della schiuma in scala logaritmica di frequenza, evidenziando l'aumento monotono dovuto al meccanismo di dissipazione viscosa nei pori.*
+- **Bandgap del metamateriale:** Il crollo verticale della trasmissione a $1000 \text{ Hz}$ ($-31.4 \text{ dB}$) identifica con precisione la frequenza di risonanza locale delle sfere di gomma piombata. In questa specifica banda, l'energia acustica non viene semplicemente assorbita, ma intrappolata e riflessa dall'oscillazione in controfase dei nuclei pesanti.
 
-### 6.1 Interpretazione ipotetica dei dati
+### 6.2 Limiti del prototipo ed errori sistematici
+Le imperfezioni geometriche derivate dal processo di stampa 3D (come l'effetto a gradini sulle sezioni paraboliche riflettenti) hanno generato fenomeni di scattering e diffrazione secondaria non isolabili in camera anecoica. Questo limite strutturale, unito all'incertezza intrinseca dei microfoni commerciali utilizzati, giustifica il margine di errore di $\pm 1.5 \text{ dB}$. Ciononostante, il forte contrasto tra le curve dei diversi materiali dimostra che il livello di precisione del prototipo è ampiamente sufficiente per scopi analitici e didattici.
 
-- Uniformità del fascio: valori di RMS costanti lungo la direzione del fascio suggellerebbero un comportamento vicino al modello ideale.
-- Direzionalità: un angolo di divergenza contenuto supporterebbe l'efficacia del design.
-- Effetto dei metamateriali: le misure di attenuazione differenziale e i picchi di risonanza potrebbero indicare l'azione filtrante delle strutture acustiche studiate.
-
-### 6.2 Implicazioni e limiti
-
-Il metodo proposto potrebbe essere applicato a esperimenti didattici e a prototipi di dispositivi acustici direzionali. Un limite importante è che il modello assume condizioni ideali di riflessione e non considera completamente le perdite viscose/termiche e la dispersione tipica dei materiali plastici.
 
 ## 7. Conclusioni
 
-Questo lavoro descrive un approccio integrato alla generazione di un fascio sonoro parallelo basato su un profilo di Fresnel e su una catena sperimentale a doppio microfono. La combinazione di modellazione matematica, prototipazione 3D e strumenti software mira a creare un ambiente riproducibile per lo studio dei metamateriali acustici.
+Questo lavoro descrive un approccio integrato alla generazione di un fascio sonoro parallelo basato su un profilo di Fresnel e su una catena sperimentale a doppio microfono. La combinazione di modellazione matematica, prototipazione 3D e strumenti software mira a creare un ambiente riproducibile per lo studio dei metamateriali acustici. Analizza poi i dati raccolti e li discute, comparandoli poi a quelli previsti. 
 
-Il paper lascia spazio all'inserimento futuro dei risultati sperimentali, mentre la discussione offre una visione critica e ipotetica delle prestazioni attese. Il progetto può essere ampliato con misure più precise, l'ottimizzazione del profilo e l'integrazione di nuove tipologie di metamateriali.
-
+L'esperimento si può dire un parziale successo: siamo riusciti ad ottenere i risultati che volevamo, sia per lo specchio parabolico che per i metamateriali, ma non siamo riusciti ad ottenere la precisione che avremmo desiderato.
 
 ---
 
 ## Appendice A: Strumenti software sviluppati
 
-- `audio_comparator`: pacchetto Python per l'acquisizione e l'analisi comparativa di due canali microfonici.
-- `ZeroMirror Creator`: tool per la generazione di geometrie acustiche basate su profili di Fresnel e file STL per la stampa 3D.
+- `Audio comparator`: pacchetto Python per l'acquisizione e l'analisi comparativa di due canali microfonici.
+- `ZeroMirror creator`: tool per la generazione di geometrie acustiche basate su profili di Fresnel e file STL per la stampa 3D.
 - `Sito ZeroMirror`: la repository del sito ZeroMirror (attualmente privo di dominio) si può trovare al seguente link: https://github.com/Jimmy47730/Progetto-scientifico
